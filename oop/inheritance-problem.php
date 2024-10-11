@@ -1,48 +1,69 @@
 <?php
+
 // Mendefinisikan class Produk
-class Produk {
-  public  $judul,
+class Produk 
+{
+  public $judul,
           $penulis,
           $penerbit,
           $harga,
           $jmlHalaman,
-          $waktuMain,
-          $tipe;
-  public function __construct( $judul = "judul", $penulis = "penulis", $penerbit = "penerbit", $harga = 0, $jmlHalaman = 0, $waktuMain = 0, $tipe = "" ) {
-    $this->judul = $judul;
-    $this->penulis = $penulis;
-    $this->penerbit = $penerbit;
-    $this->harga = $harga;
-    $this->jmlHalaman = $jmlHalaman;
-    $this->waktuMain = $waktuMain;
-    $this->tipe = $tipe;
-  }
-  public function getLabel() {
-    return "$this->penulis, $this->penerbit";
-  }
-  public function getInfoLengkap() {
-    // Format dasar informasi lengkap produk
-    $str = "{$this->tipe} : {$this->judul} | {$this->getLabel()} (Rp. {$this->harga})";
-    // Jika tipe produk adalah Komik, tambahkan informasi jumlah halaman
-    if( $this->tipe == "Komik" ) {
-      $str .= " - {$this->jmlHalaman} Halaman.";
-    // Jika tipe produk adalah Game, tambahkan informasi waktu main
-    } else if( $this->tipe == "Game" ) {
-      $str .= " ~ {$this->waktuMain} Jam.";
+          $waktuMain;
+
+    // Konstruktor: Digunakan untuk menginisialisasi objek Produk saat dibuat.
+    public function __construct($tipe, $judul = "judul", $penulis = "penulis", $penerbit = "penerbit", $harga = 0, $jmlHalaman = 0, $waktuMain = 0)
+    {
+        $this->judul = $judul;
+        $this->penulis = $penulis;
+        $this->penerbit = $penerbit;
+        $this->harga = $harga;
+        $this->jmlHalaman = $jmlHalaman;
+        $this->waktuMain = $waktuMain;
     }
-    return $str;
-  }
+
+    public function getLabel()
+    {
+        return "$this->penulis, $this->penerbit";
+    }
+
+    public function getInfoProduk()
+    {
+        $str = "{$this->judul} | {$this->getLabel()}  {$this->harga}";
+        return $str;
+    }
 }
-class CetakInfoProduk {
-  public function cetak( Produk $produk ) {
-    $str = "{$produk->judul} | {$produk->getLabel()} (Rp. {$produk->harga})";
-    return $str;
-  }
+
+// Kelas CetakInfoProduk: Kelas ini bertugas untuk mencetak informasi Produk.
+class CetakInfoProduk
+{
+    public function cetak(Produk $Produk)
+    {
+        $str = "{$Produk->judul} | {$Produk->getLabel()} {$Produk->harga}";
+        return $str;
+    }
 }
-$produk1 = new Produk("Naruto", "Masashi Kishimoto", "Shonen Jump", 30000, 100, 0, "Komik");
-$produk2 = new Produk("Uncharted", "Neil Druckmann", "Sony Computer", 250000, 0, 50, "Game");
-echo $produk1->getInfoLengkap();
-echo "<br>";
-echo $produk2->getInfoLengkap();
-// Komik : Naruto | Masashi Kishimoto, Shonen Jump (Rp. 30000) - 100 Halaman.
-// Game : Uncharted | Neil Druckmann, Sony Computer (Rp. 250000) ~ 50 Jam.
+
+// Kelas Komik: Subclass dari Produk untuk Produk Komik.
+class Komik extends Produk
+{
+    public function getInfoProduk()
+    {
+        $str = "Komik: {$this->judul} | {$this->getLabel()} {$this->harga} - {$this->jmlHalaman} halaman";
+        return $str;
+    }
+}
+
+// Kelas Game: Subclass dari Produk untuk Produk Game.
+class Game extends Produk
+{
+    public function getInfoProduk()
+    {
+        $str = "Game: {$this->judul} | {$this->getLabel()} {$this->harga} - {$this->waktuMain} Jam";
+        return $str;
+    }
+}
+
+$produk1 = new Komik("Komik", "Naruto", "Masashi", "Shonen Jump", 30000, 100, 0);
+$produk2 = new Game("Game", "Uncharted", "Neil", "Sony Computer", 30000, 0, 50);
+
+echo $produk1->getInfoProduk();
