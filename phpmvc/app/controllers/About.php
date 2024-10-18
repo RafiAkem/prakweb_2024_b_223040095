@@ -1,15 +1,21 @@
 <?php
-class About
+class About extends Controller
 {
-  public function index($nama = 'Rafi ', $pekerjaan = 'mahasiswa ')
+  public function index($nama = 'Rafi ', $pekerjaan = 'Mahasiswa ', $umur = 20)
   {
-    // Menambahkan log untuk memastikan metode ini dipanggil
-    error_log("Metode index dipanggil dengan nama: $nama dan pekerjaan: $pekerjaan");
-    
-    echo "halo saya " . $nama . "saya adalah seorang " . $pekerjaan;
+    $data['nama'] = $nama;
+    $data['pekerjaan'] = $pekerjaan;
+    $data['umur'] = $umur;
+    $data['judul'] = 'About Me';
+    $this->view('templates/header', $data);
+    $this->view('about/index', $data);
+    $this->view('templates/footer', $data);
   }
   public function page()
   {
-    echo 'About/page';
+    $data['judul'] = 'Pages';
+    $this->view('templates/header', $data);
+    $this->view('about/page');
+    $this->view('templates/footer', $data);
   }
 }

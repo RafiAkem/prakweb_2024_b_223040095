@@ -1,8 +1,9 @@
-<?php
-class Home
-{
-  public function index()
-  {
-    echo 'home/index'; // Mengembalikan isi ke 'home/index'
-  }
+<?php 
+class Home extends Controller{
+    public function index(){
+        $data['judul'] = 'Home';
+        $this->view('templates/header', $data);
+        $this->view('home/index');
+        $this->view('templates/footer');
+    }
 }
