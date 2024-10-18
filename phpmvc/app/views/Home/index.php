@@ -1,13 +1,10 @@
-<!-- <div class="container">
-<h1>Selamat Datang di Website ku</h1>
-
-</div> -->
-
 <div class="container">
-    <div class="jumbotron mt-2">
-        <h1 class ="display-4">Hello, Selamat Datang di Website ku</h1>
-        <p class="lead">Semoga website ini bermanfaat bagi anda.
-        </p>
-        <hr class="my-4">
+  <div class="container py-5">
+    <div class="p-5 mb-4 bg-secondary rounded-3">
+      <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Selamat datang di website saya</h1>
+        <p class="col-md-8 fs-4">saya adalah <?= $data['nama']; ?></p>
+        <button class="btn btn-primary btn-lg" type="button">button</button>
+      </div>
     </div>
-</div>
+  </div>
