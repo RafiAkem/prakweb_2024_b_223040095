@@ -18,4 +18,26 @@ class Mahasiswa extends Controller
     $this->view('mahasiswa/detail', $data);
     $this->view('templates/footer');
   }
+
+  public function tambah()
+  {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      // Ambil data dari formulir
+      $data = [
+        'nama' => $_POST['nama'],
+        'nrp' => $_POST['nrp'],
+        'email' => $_POST['email'],
+        'jurusan' => $_POST['jurusan']
+      ];
+
+      // Panggil model untuk menambah data
+      if ($this->model('Mahasiswa_model')->tambahDataMahasiswa($data) > 0) {
+        header('Location: ' . BASEURL . '/mahasiswa'); // Redirect setelah berhasil
+        exit;
+      } else {
+        // Tangani kesalahan jika gagal
+        echo "Data gagal ditambahkan.";
+      }
+    }
+  }
 }

@@ -50,7 +50,7 @@ $option = [
     }
 
     public function execute() {
-        return $this->stmt->execute(); // Pastikan ini tidak mengubah parameter
+        return $this->stmt->execute();
     }
 
     public function resultSet() {
@@ -61,5 +61,9 @@ $option = [
     public function single() {
         $this->execute();
         return $this->stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function rowCount() {
+        return $this->stmt->rowCount();
     }
 }
