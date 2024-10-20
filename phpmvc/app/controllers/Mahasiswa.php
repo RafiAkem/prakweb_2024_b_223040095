@@ -30,13 +30,17 @@ class Mahasiswa extends Controller
         'jurusan' => $_POST['jurusan']
       ];
 
+      
+
       // Panggil model untuk menambah data
       if ($this->model('Mahasiswa_model')->tambahDataMahasiswa($data) > 0) {
+        Flasher::setFlash('berhasil', ' ditambahkan', 'success');
         header('Location: ' . BASEURL . '/mahasiswa'); // Redirect setelah berhasil
         exit;
       } else {
-        // Tangani kesalahan jika gagal
-        echo "Data gagal ditambahkan.";
+        Flasher::setFlash('gagal', 'ditambahkan', 'danger');
+        header('Location: ' . BASEURL . '/mahasiswa'); // Redirect setelah gagal
+        exit;
       }
     }
   }
