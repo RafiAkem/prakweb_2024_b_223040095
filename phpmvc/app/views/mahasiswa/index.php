@@ -1,23 +1,28 @@
 <div class="container mt-3">
-  <div class="row">
+
+<div class="row">
     <div class="col-6">
       <?php Flasher::flash(); ?>
     </div>
-  </div>
+</div>
+
+  <div class="row">
+    <div class="col-lg-6">
     <button type="button" class="btn btn-dark mb-5 mt-5" data-bs-toggle="modal" data-bs-target="#formModal">
         Tambah Data Mahasiswa
       </button>
       <br>
       <h3>Daftar Mahasiswa</h3>
-      <ul>
+      <ul class="list-group">
         <?php foreach ($data['mhs'] as $mhs) : ?>
-          <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-start">
-              <?= $mhs['nama']; ?>
-              <a href="<?= BASEURL; ?>/mahasiswa/detail/<?= $mhs['id']; ?> " class="badge text-bg-dark"> Detail</a>
-            </li>
-          <?php endforeach; ?>
-          </ul>
+          <li class="list-group-item">
+            <?= $mhs['nama']; ?>
+            <a href="<?= BASEURL; ?>/mahasiswa/hapus/<?= $mhs['id']; ?>" class="badge bg-danger float-end ms-1" onclick="return confirm('Yakin?');">Hapus</a>
+            <a href="<?= BASEURL; ?>/mahasiswa/detail/<?= $mhs['id']; ?>" class="badge bg-primary float-end ms-1">Detail</a>
+          </li>
+        <?php endforeach; ?>
+      </ul>
+      
     </div>
   </div>
   </div>
@@ -33,35 +38,34 @@
         <form action="<?= BASEURL; ?>/mahasiswa/tambah" method="post">
           <div class="mb-3">
             <label for="nama" class="form-label">Nama</label>
-            <input type="text" class="form-control" id="nama" name="nama" required>
+            <input type="text" class="form-control" id="nama" name="nama">
           </div>
 
           <div class="mb-3">
-            <label for="nrp" class="form-label">NRP</label>
-            <input type="number" class="form-control" id="nrp" name="nrp" required>
+            <label for="nrp" class="form-label">Nrp</label>
+            <input type="number" class="form-control" id="nrp" name="nrp">
           </div>
 
           <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" required>
+            <input type="email" class="form-control" id="email" name="email">
           </div>
 
           <div class="form-group">
-            <label for="jurusan" class="form-label">Jurusan</label>
-            <select class="form-control" id="jurusan" name="jurusan" required>
-              <option value="Teknik Informatika">Teknik Informatika</option>
-              <option value="Teknik Mesin">Teknik Mesin</option>
-              <option value="Teknik Lingkungan">Teknik Lingkungan</option>
-              <option value="Teknik Industri">Teknik Industri</option>
-              <option value="Teknik Planologi">Teknik Planologi</option>
-              <option value="Teknik Pangan">Teknik Pangan</option>
+            <label class="form-control" id="jurusan" name="jurusan">Jurusan</label>
+            <select type="text" class="form-control" id="jurusan" name="jurusan">
+              <option value="Teknik Informatika"> Teknik Informatika</option>
+              <option value="Teknik Mesin"> Teknik Mesin</option>
+              <option value="Teknik Lingkungan"> Teknik Lingkungan</option>
+              <option value="Teknik Industri"> Teknik Industri</option>
+              <option value="Teknik Planologi"> Teknik Planologi</option>
+              <option value="Teknik Pangan"> Teknik Pangan</option>
             </select>
           </div>
 
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Tambah Data</button>
-          </div>
+            <button type="submit" class="btn btn-primary">Tambah data</button>
         </form>
       </div>
     </div>
